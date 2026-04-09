@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+/* ─── Custom Fonts ─────────────────────────────────────────────── */
+@font-face {
+  font-family: 'Helvetica Now Text';
+  src: url('/fonts/HelveticaNowText-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Helvetica Now Text';
+  src: url('/fonts/HelveticaNowText-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Helvetica Now Text';
+  src: url('/fonts/HelveticaNowText-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Urbanist';
+  src: url('/fonts/Urbanist-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ─── Design Tokens ─────────────────────────────────────────────── */
+@theme inline {
+  /* Colors */
+  --color-bg:               #000000;
+  --color-surface:          #111111;
+  --color-surface-hover:    #1a1a1a;
+  --color-border:           #222222;
+  --color-border-hover:     #333333;
+  --color-text-primary:     #ffffff;
+  --color-text-secondary:   #a0a0a0;
+  --color-placeholder:      #0d0d1a;
+  --color-placeholder-text: #3a3a5c;
+
+  /* Typography */
+  --font-sans: 'Helvetica Now Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* ─── Responsive Page Margin ────────────────────────────────────── */
+:root {
+  --page-margin: 128px;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --page-margin: 48px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --page-margin: 16px;
+  }
+}
+
+/* ─── Base Styles ────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #000000;
+  color: #ffffff;
+  font-family: 'Helvetica Now Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Mobile section spacing ─────────────────────────────────────── */
+@media (max-width: 640px) {
+  section {
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
+  }
+}
+
+/* ─── Scroll Padding for sticky nav ─────────────────────────────── */
+[id] {
+  scroll-margin-top: 72px;
+}
