@@ -42,7 +42,7 @@ export function Navigation() {
           transition: 'background-color 0.3s ease, border-color 0.3s ease',
         }}
       >
-        {/* Inner wrapper — matches content max-width and margins */}
+        {/* Inner wrapper */}
         <div
           style={{
             maxWidth: '1280px',
@@ -101,7 +101,7 @@ export function Navigation() {
           </button>
         </div>
 
-        {/* Mobile menu — position: fixed, lives outside the inner wrapper */}
+        {/* Mobile menu */}
         {menuOpen && (
           <div
             style={{
@@ -137,6 +137,7 @@ export function Navigation() {
             text-decoration: none;
             letter-spacing: 0;
             transition: color 0.2s ease;
+            white-space: nowrap;
           }
           .nav-link:hover { color: #aaaaaa; }
           .nav-btn {
@@ -146,7 +147,7 @@ export function Navigation() {
             padding: 0;
             font-family: inherit;
           }
-          @media (max-width: 640px) {
+          @media (max-width: 768px) {
             .nav-desktop { display: none !important; }
             .nav-mobile-btn { display: flex !important; }
           }
@@ -205,7 +206,6 @@ export function Navigation() {
                   border: '1px solid #333',
                   borderRadius: '4px',
                   padding: '8px 16px',
-                  transition: 'border-color 0.2s ease',
                 }}
               >
                 Download
@@ -224,7 +224,6 @@ export function Navigation() {
                   padding: '8px 16px',
                   cursor: 'pointer',
                   fontFamily: 'inherit',
-                  transition: 'border-color 0.2s ease',
                 }}
               >
                 Print
@@ -248,7 +247,6 @@ export function Navigation() {
             </div>
           </div>
 
-          {/* Resume image */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/images/resume.png"

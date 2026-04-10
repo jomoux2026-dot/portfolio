@@ -1,9 +1,12 @@
+import React from 'react'
+
 interface StrengthCardProps {
   title: string
   description: string
+  icon?: React.ReactNode
 }
 
-export function StrengthCard({ title, description }: StrengthCardProps) {
+export function StrengthCard({ title, description, icon }: StrengthCardProps) {
   return (
     <div
       style={{
@@ -13,8 +16,15 @@ export function StrengthCard({ title, description }: StrengthCardProps) {
         padding: '28px 32px',
         height: '100%',
         boxSizing: 'border-box' as const,
+        display: 'flex',
+        flexDirection: 'column' as const,
       }}
     >
+      {icon && (
+        <div style={{ color: '#aaaaaa', marginBottom: '18px', lineHeight: 0 }}>
+          {icon}
+        </div>
+      )}
       <h3 style={{
         fontSize: '15px',
         fontWeight: 700,

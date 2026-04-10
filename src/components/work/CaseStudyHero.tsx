@@ -1,23 +1,33 @@
 import { CaseStudy } from '@/lib/types'
 import { Tag } from '@/components/ui/Tag'
-import { ImagePlaceholder } from '@/components/ui/ImagePlaceholder'
+import { ImageLightbox } from '@/components/ui/ImageLightbox'
 
 interface CaseStudyHeroProps {
   caseStudy: CaseStudy
+  images?: string[]
 }
 
-export function CaseStudyHero({ caseStudy }: CaseStudyHeroProps) {
+export function CaseStudyHero({ caseStudy, images }: CaseStudyHeroProps) {
+  const heroImages = images ?? []
+
   return (
     <section
       style={{
-        padding: '140px 40px 80px',
-        maxWidth: '1000px',
+        paddingTop: '140px',
+        paddingBottom: '80px',
+        paddingLeft: 'var(--page-margin)',
+        paddingRight: 'var(--page-margin)',
+        maxWidth: '1280px',
         margin: '0 auto',
         width: '100%',
+        boxSizing: 'border-box' as const,
       }}
     >
-      {/* Tags */}
-      <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' as const, marginBottom: '24px' }}>
+      {/* Tags — hidden on mobile */}
+      <div
+        style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' as const, marginBottom: '24px' }}
+        className="cs-tags"
+      >
         {caseStudy.tags.map((tag) => (
           <Tag key={tag} label={tag} />
         ))}
@@ -52,23 +62,53 @@ export function CaseStudyHero({ caseStudy }: CaseStudyHeroProps) {
         {caseStudy.subtitle}
       </p>
 
-      {/* Hero image / mockups row */}
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
-          gap: '16px',
-        }}
-      >
-        {[1, 2, 3].map((i) => (
-          <ImagePlaceholder
-            key={i}
-            label={`Mobile mockup screen ${i} — PNG/JPG`}
-            height={420}
-            style={{ borderRadius: '8px' }}
-          />
-        ))}
-      </div>
+      {/* Hero images — full height, no cropping */}
+      {heroImages.length > 0 && (
+        <>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(3, 1fr)',
+              gap: '16px',
+              marginBottom: '16px',
+            }}
+            className="cs-hero-grid"
+          >
+            {heroImages.map((src, i) => (
+              <div
+                key={i}
+                style={{
+                  borderRadius: '8px',
+                  overflow: 'hidden',
+                }}
+              >
+                <ImageLightbox
+                  src={src}
+                  alt={`${caseStudy.title} — screen ${i + 1}`}
+                  style={{ objectFit: 'contain', height: 'auto' }}
+                />
+              </div>
+            ))}
+          </div>
+
+          {/* NDA disclaimer */}
+          <p style={{
+            fontSize: '11px',
+            fontWeight: 400,
+            color: '#aaaaaa',
+            lineHeight: 1.6,
+          }}>
+            Note: Due to NDA restrictions, final screens are not available. All designs shown are recreated from memory and may differ from the shipped product and final outcomes.
+          </p>
+        </>
+      )}
+
+      <style>{`
+        @media (max-width: 768px) {
+          .cs-tags { display: none !important; }
+          .cs-hero-grid { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
     </section>
   )
 }

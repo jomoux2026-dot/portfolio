@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(powershell.exe -Command '$env:PATH = '\\\\''C:\\\\Program Files\\\\nodejs;'\\\\'' + $env:PATH; cd '\\\\''C:\\\\Users\\\\jjmoo\\\\dev\\\\portfolio-2026'\\\\''; npm install framer-motion 2>&1')"
+    ]
+  }
+}

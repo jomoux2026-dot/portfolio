@@ -6,10 +6,14 @@ export function OutcomeSection({ outcome }: OutcomeSectionProps) {
   return (
     <section
       style={{
-        padding: '80px 40px 120px',
-        maxWidth: '1000px',
+        paddingTop: '80px',
+        paddingBottom: '120px',
+        paddingLeft: 'var(--page-margin)',
+        paddingRight: 'var(--page-margin)',
+        maxWidth: '1280px',
         margin: '0 auto',
         width: '100%',
+        boxSizing: 'border-box' as const,
         borderTop: '1px solid #1a1a1a',
       }}
     >

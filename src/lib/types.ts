@@ -21,6 +21,8 @@ export interface ProcessStep {
   heading: string
   body: string
   image?: string
+  imageCaption?: string
+  extraImages?: { label: string; src: string; alt: string }[]
 }
 
 export interface GalleryImage {
