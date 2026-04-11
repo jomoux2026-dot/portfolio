@@ -1,7 +1,12 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Navigation } from '@/components/layout/Navigation'
 import { Footer } from '@/components/layout/Footer'
 import './globals.css'
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+}
 
 export const metadata: Metadata = {
   title: {
