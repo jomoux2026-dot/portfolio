@@ -50,9 +50,35 @@
   --font-sans: 'Helvetica Now Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+/* ─── Viewport Scaling ───────────────────────────────────────────── */
+@media (min-width: 1440px) {
+  html {
+    zoom: 1.25;
+  }
+}
+
+@media (min-width: 1920px) {
+  html {
+    zoom: 1.4;
+  }
+}
+
 /* ─── Responsive Page Margin ────────────────────────────────────── */
 :root {
   --page-margin: 128px;
+  --hero-min-height: 100dvh;
+}
+
+@media (min-width: 1920px) {
+  :root {
+    --hero-min-height: 50dvh;
+  }
+}
+
+@media (min-width: 1440px) {
+  :root {
+    --hero-min-height: 80dvh;
+  }
 }
 
 @media (max-width: 768px) {
@@ -89,7 +115,7 @@ body {
 
 /* ─── Mobile section spacing ─────────────────────────────────────── */
 @media (max-width: 640px) {
-  section {
+  section:not(.cs-hero) {
     padding-top: 48px !important;
     padding-bottom: 48px !important;
   }

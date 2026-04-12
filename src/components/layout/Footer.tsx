@@ -49,7 +49,7 @@ export function Footer() {
           gap: '12px',
         }}
       >
-        <div style={{ display: 'flex', gap: '32px', alignItems: 'center' }}>
+        <div style={{ display: 'flex', gap: '32px', alignItems: 'center' }} className="footer-links">
           <a
             href="mailto:jomoux2026@gmail.com"
             style={{
@@ -76,13 +76,17 @@ export function Footer() {
           </a>
         </div>
 
-        <span style={{ fontSize: '14px', fontWeight: 300, color: '#ffffff' }}>
+        <span style={{ fontSize: '14px', fontWeight: 300, color: '#ffffff' }} className="footer-location">
           Based in California
         </span>
       </div>
 
       <style>{`
         .back-to-top:hover { color: #aaaaaa; }
+        @media (max-width: 768px) {
+          .footer-links { display: none !important; }
+          .footer-location { text-align: center; width: 100%; }
+        }
       `}</style>
     </footer>
   )

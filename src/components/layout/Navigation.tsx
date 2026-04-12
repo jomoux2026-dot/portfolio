@@ -18,13 +18,27 @@ export function Navigation() {
   }, [])
 
   useEffect(() => {
-    if (resumeOpen) {
+    if (resumeOpen || menuOpen) {
       document.body.style.overflow = 'hidden'
     } else {
       document.body.style.overflow = ''
     }
     return () => { document.body.style.overflow = '' }
-  }, [resumeOpen])
+  }, [resumeOpen, menuOpen])
+
+  const menuLinkStyle = {
+    fontSize: '24px',
+    fontWeight: 400,
+    color: '#ffffff',
+    textDecoration: 'none',
+    display: 'block',
+    padding: '20px 0',
+    width: '100%',
+  } as const
+
+  const dividerStyle = {
+    borderBottom: '0.5px solid rgba(255,255,255,0.2)',
+  } as const
 
   return (
     <>
@@ -45,7 +59,7 @@ export function Navigation() {
         {/* Inner wrapper */}
         <div
           style={{
-            maxWidth: '1280px',
+            maxWidth: '1440px',
             margin: '0 auto',
             height: '100%',
             display: 'flex',
@@ -80,7 +94,7 @@ export function Navigation() {
             <a href="https://www.behance.net/jjmoon11220aed" target="_blank" rel="noopener noreferrer" className="nav-link">Daily UI</a>
           </div>
 
-          {/* Mobile hamburger */}
+          {/* Mobile hamburger / close button */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             style={{
@@ -89,45 +103,25 @@ export function Navigation() {
               cursor: 'pointer',
               padding: '8px',
               display: 'none',
-              flexDirection: 'column' as const,
-              gap: '5px',
+              alignItems: 'center',
+              justifyContent: 'center',
+              zIndex: 151,
+              position: 'relative' as const,
             }}
-            aria-label="Toggle menu"
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
             className="nav-mobile-btn"
           >
-            {[0, 1, 2].map((i) => (
-              <span key={i} style={{ display: 'block', width: '22px', height: '1px', backgroundColor: '#ffffff' }} />
-            ))}
+            {menuOpen ? (
+              <span style={{ color: '#ffffff', fontSize: '24px', lineHeight: 1, display: 'block' }}>×</span>
+            ) : (
+              <span style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+                {[0, 1, 2].map((i) => (
+                  <span key={i} style={{ display: 'block', width: '22px', height: '1px', backgroundColor: '#ffffff' }} />
+                ))}
+              </span>
+            )}
           </button>
         </div>
-
-        {/* Mobile menu */}
-        {menuOpen && (
-          <div
-            style={{
-              position: 'fixed',
-              top: '72px',
-              left: 0,
-              right: 0,
-              backgroundColor: 'rgba(0,0,0,0.97)',
-              backdropFilter: 'blur(10px)',
-              paddingTop: '32px',
-              paddingBottom: '32px',
-              paddingLeft: 'var(--page-margin)',
-              paddingRight: 'var(--page-margin)',
-              display: 'flex',
-              flexDirection: 'column' as const,
-              gap: '24px',
-              borderBottom: '1px solid #111111',
-            }}
-          >
-            <Link href={isHome ? '#work' : '/#work'} style={{ fontSize: '20px', fontWeight: 400, color: '#ffffff', textDecoration: 'none' }} onClick={() => setMenuOpen(false)}>Work</Link>
-            <Link href={isHome ? '#about' : '/#about'} style={{ fontSize: '20px', fontWeight: 400, color: '#ffffff', textDecoration: 'none' }} onClick={() => setMenuOpen(false)}>About</Link>
-            <button onClick={() => { setMenuOpen(false); setResumeOpen(true) }} style={{ fontSize: '20px', fontWeight: 400, color: '#ffffff', textDecoration: 'none', background: 'none', border: 'none', cursor: 'pointer', padding: 0, textAlign: 'left' as const }}>Resume</button>
-            <a href="https://dribbble.com/joshymoony" target="_blank" rel="noopener noreferrer" style={{ fontSize: '20px', fontWeight: 400, color: '#ffffff', textDecoration: 'none' }} onClick={() => setMenuOpen(false)}>Dribbble</a>
-            <a href="https://www.behance.net/jjmoon11220aed" target="_blank" rel="noopener noreferrer" style={{ fontSize: '20px', fontWeight: 400, color: '#ffffff', textDecoration: 'none' }} onClick={() => setMenuOpen(false)}>Daily UI</a>
-          </div>
-        )}
 
         <style>{`
           .nav-link {
@@ -153,6 +147,75 @@ export function Navigation() {
           }
         `}</style>
       </nav>
+
+      {/* Mobile menu — full-page modal */}
+      {menuOpen && (
+        <div
+          style={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: 99,
+            backgroundColor: 'rgba(0,0,0,0.75)',
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)',
+            display: 'flex',
+            flexDirection: 'column' as const,
+            paddingTop: '72px',
+            paddingLeft: 'var(--page-margin)',
+            paddingRight: 'var(--page-margin)',
+            overflowY: 'auto',
+          }}
+        >
+          <div style={dividerStyle}>
+            <Link
+              href={isHome ? '#work' : '/#work'}
+              style={menuLinkStyle}
+              onClick={() => setMenuOpen(false)}
+            >
+              Work
+            </Link>
+          </div>
+          <div style={dividerStyle}>
+            <Link
+              href={isHome ? '#about' : '/#about'}
+              style={menuLinkStyle}
+              onClick={() => setMenuOpen(false)}
+            >
+              About
+            </Link>
+          </div>
+          <div style={dividerStyle}>
+            <button
+              onClick={() => { setMenuOpen(false); setResumeOpen(true) }}
+              style={{ ...menuLinkStyle, background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'inherit', textAlign: 'left' as const }}
+            >
+              Resume
+            </button>
+          </div>
+          <div style={dividerStyle}>
+            <a
+              href="https://dribbble.com/joshymoony"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={menuLinkStyle}
+              onClick={() => setMenuOpen(false)}
+            >
+              Dribbble
+            </a>
+          </div>
+          <div style={dividerStyle}>
+            <a
+              href="https://www.behance.net/jjmoon11220aed"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={menuLinkStyle}
+              onClick={() => setMenuOpen(false)}
+            >
+              Daily UI
+            </a>
+          </div>
+        </div>
+      )}
 
       {/* Resume overlay */}
       {resumeOpen && (

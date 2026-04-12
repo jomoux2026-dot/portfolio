@@ -20,7 +20,7 @@ export function OverviewSection({ caseStudy }: OverviewSectionProps) {
         paddingBottom: '80px',
         paddingLeft: 'var(--page-margin)',
         paddingRight: 'var(--page-margin)',
-        maxWidth: '1280px',
+        maxWidth: '1440px',
         margin: '0 auto',
         width: '100%',
         boxSizing: 'border-box' as const,
